@@ -1,4 +1,4 @@
 ## Intro to Database Systems 
-## Spring 2026
 
 #### This repository will store the assigments and labs for this class thorughtout the semester 
+ this file will hold the instructions and files needed to completed the assignments and labs 
