@@ -74,4 +74,86 @@ ORDER BY TotalItemOnHandLT3 DESC ;
 /* 2.40*/
 SELECT SKU, SKU_Description , WarehouseID , WarehouseCity , WarehouseState
 FROM INVENTORY JOIN WAREHOUSE
-WHERE SKU , SKU_Description, WarehouseID , WarehouseCity  WarehouseState = 'Atlanta', 'Bangor', 'chicago'
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE SKU =  ('Atlanta') OR SKU = ('Bangor') OR SKU = ('chicago')
+    AND SKU_Description =  ('Atlanta') OR SKU_Description = ('Bangor') OR SKU_Description = ('chicago')
+     AND WarehouseID =  ('Atlanta') OR WarehouseID = ('Bangor') OR WarehouseID = ('chicago')
+     AND WarehouseCity =  ('Atlanta') OR WarehouseCity = ('Bangor') OR WarehouseCity =('chicago')
+     AND WarehouseState =  ('Atlanta') OR WarehouseState = ('Bangor') OR WarehouseState =('chicago');
+
+/* 2.41*/
+SELECT SKU, SKU_Description , WarehouseID , WarehouseCity , WarehouseState
+FROM INVENTORY JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE SKU IN ('Atlanta', 'Bangor', 'chicago')
+    AND SKU_Description IN  ('Atlanta', 'Bangor', 'chicago')
+     AND WarehouseID  IN ('Atlanta', 'Bangor', 'chicago')
+     AND WarehouseCity IN ('Atlanta', 'Bangor', 'chicago')
+     AND WarehouseState IN ('Atlanta', 'Bangor', 'chicago');
+
+/* 2.42 */
+SELECT SKU, SKU_Description , WarehouseID , WarehouseCity , WarehouseState
+FROM INVENTORY JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE SKU <>  ('Atlanta') OR SKU <> ('Bangor') OR SKU <> ('chicago')
+    AND SKU_Description <>  ('Atlanta') OR SKU_Description <> ('Bangor') OR SKU_Description <> ('chicago')
+     AND WarehouseID <>  ('Atlanta') OR WarehouseID <> ('Bangor') OR WarehouseID = ('chicago')
+     AND WarehouseCity <>  ('Atlanta') OR WarehouseCity <> ('Bangor') OR WarehouseCity <> ('chicago')
+     AND WarehouseState <>  ('Atlanta') OR WarehouseState <> ('Bangor') OR WarehouseState <> ('chicago');
+
+/* 2.43 */
+SELECT SKU, SKU_Description , WarehouseID , WarehouseCity , WarehouseState
+FROM INVENTORY JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE SKU NOT IN ('Atlanta', 'Bangor', 'chicago')
+    AND SKU_Description NOT IN  ('Atlanta', 'Bangor', 'chicago')
+     AND WarehouseID  NOT IN ('Atlanta', 'Bangor', 'chicago')
+     AND WarehouseCity NOT IN ('Atlanta', 'Bangor', 'chicago')
+     AND WarehouseState NOT IN ('Atlanta', 'Bangor', 'chicago');
+
+/* 2.44 */
+SELECT CONCAT(SKU_Description, 'is in a warehouse in ', WarehouseCity)
+FROM INVENTORY JOIN WAREHOUSE
+ON INVENTORY.SKU_Description = WAREHOUSE.WarehouseCity;
+
+/* 2.45 */
+SELECT SKU, SKU_Description, WarehouseID
+FROM INVENTORY
+WHERE INVENTORYID IN(
+    SELECT WarehouseID
+    FROM WAREHOUSE
+    WHERE WarehouseManager ='Lucille Smith';
+    )
+
+/* 2.46 */
+SELECT SKU, SKU_Description, WarehouseID
+FROM INVENTORY JOIN WAREHOUSE
+ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE WAREHOUSE.WarehouseManager = 'Lucille Smith';
+
+/*2.47*/
+SELECT SKU, SKU_Description, WarehouseID
+FROM INVENTORY
+JOIN INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+AND WAREHOUSE.WarehouseManager = 'Lucille Smith';
+
+/*2.48 */
+SELECT WarehouseID , AVG(QuantityOnHand)
+FROM INVENTORY
+WHERE INVENTORYID IN{
+SELECT WarehouseID , AVG(QuantityOnHand)
+    FROM WAREHOUSE
+        WHERE WarehouseManager = 'Lucille Smith'
+}
+
+/*2.49 */
+SELECT WarehouseID , AVG(QuantityOnHand)
+FROM INVENTORY
+JOIN WAREHOUSE WHERE INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+AND INVENTORY.WarehouseManager = 'Lucille Smith';
+
+/* 2.50 */
+SELECT WarehouseID , AVG(QuantityOnHand)
+FROM INVENTORY
+JOIN WAREHOUSE ON INVENTORY.WarehouseID = WAREHOUSE.WarehouseID
+WHERE INVENTORY.WarehouseManager = 'Lucille Smith';
