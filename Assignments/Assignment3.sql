@@ -1,3 +1,6 @@
+/* the instruction for the homeworks can be found under the instructions folder */
+
+
 /**************************/
 /* Name : Cedric-O jean-Noel*/
 /*Class :: CS 3410 */
