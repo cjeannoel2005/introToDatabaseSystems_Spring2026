@@ -1,6 +1,3 @@
-/* the instruction for the homeworks can be found under the instructions folder */
-
-
 /**************************/
 /* Name : Cedric-O jean-Noel*/
 /*Class :: CS 3410 */
@@ -41,7 +38,7 @@ FROM INVENTORY
 WHERE SKU_Description LIKE '__d@'
 
 /*2.34*/
-SELECT 
+SELECT
 
 /*2.35*/
 /* The difference is that the sum calculates the total result of all the rows by adding them together
